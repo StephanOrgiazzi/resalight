@@ -1,11 +1,15 @@
 import { useAppDispatch } from '../hooks'
 import { appointmentsActions } from '../store'
-import { AppointementType } from '../types';
-import Appointment from './Appointment';
+import { AppointementType } from '../types'
+import Appointment from './Appointment'
 
 import styles from './Hour.module.scss'
 
-const Hour: React.FC<{ value: number; appointment: boolean, data?: AppointementType | any }> = (props) => {
+const Hour: React.FC<{
+    value: number
+    appointment: boolean
+    data?: AppointementType | any
+}> = (props) => {
     const dispatch = useAppDispatch()
 
     const handleClick = (value: number) => {
@@ -20,9 +24,7 @@ const Hour: React.FC<{ value: number; appointment: boolean, data?: AppointementT
                 className={styles.hour}
             >
                 <div className={styles.value}>{props.value}:00</div>
-                {props.appointment && (
-                    <Appointment />
-                )}
+                {props.appointment && <Appointment />}
             </div>
         </li>
     )

@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import React, { useState } from 'react'
 import { useAppSelector, useAppDispatch } from '../hooks'
 import { appointmentsActions } from '../store'
 import dayjs from 'dayjs'
@@ -13,20 +13,24 @@ const MakeAppointment: React.FC = ({ id }: { id?: string }) => {
         state.appointments.find(({ id: idFromStore }) => id === idFromStore)
     )
 
+    const generateId = () => {
+        return dayjs().format('MMDDHHmmss').toString()
+    }
+
+    const selectedHour = useAppSelector((state) => state.selectedHour)
+
     const [appointment, setAppointment] = useState<AppointementType>(
         /* appointementFromStore ?? { */
         {
-            id: '',
+            id: generateId(),
             vendorName: '',
             buyerName: '',
             companyName: '',
-            selectedHour: '',
+            selectedHour,
             quarter: '',
             duration: '',
         }
     )
-
-    const selectedHour = useAppSelector((state) => state.selectedHour)
 
     const cancelHandler = (e: React.FormEvent) => {
         e.preventDefault()
@@ -35,14 +39,8 @@ const MakeAppointment: React.FC = ({ id }: { id?: string }) => {
 
     const submitHandler = (e: React.FormEvent) => {
         e.preventDefault()
-        const id = dayjs().format('MMDDHHmmss').toString()
-        setAppointment((prevAppointment) => ({
-            ...prevAppointment,
-            id: id,
-        }))
         dispatch(appointmentsActions.addAppointment(appointment))
         dispatch(appointmentsActions.toggleMakeAppointment())
-        console.log({ appointment })
     }
 
     const selectQuarterHandler = (e: React.ChangeEvent<HTMLSelectElement>) => {
@@ -59,6 +57,27 @@ const MakeAppointment: React.FC = ({ id }: { id?: string }) => {
         }))
     }
 
+    const vendorNameHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
+        setAppointment((prevAppointment) => ({
+            ...prevAppointment,
+            vendorName: e.target.value,
+        }))
+    }
+
+    const buyerNameHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
+        setAppointment((prevAppointment) => ({
+            ...prevAppointment,
+            buyerName: e.target.value,
+        }))
+    }
+
+    const companyNameHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
+        setAppointment((prevAppointment) => ({
+            ...prevAppointment,
+            companyName: e.target.value,
+        }))
+    }
+
     return (
         <Modal>
             <div className={styles.modal}>
@@ -71,9 +90,9 @@ const MakeAppointment: React.FC = ({ id }: { id?: string }) => {
                             onChange={selectQuarterHandler}
                             required
                         >
-{/*                             <option value=''>
+                            <option value=''>
                                 --Please choose a starting time--
-                            </option> */}
+                            </option>
                             <option value='00'>{`${selectedHour}:00`}</option>
                             <option value='15'>{`${selectedHour}:15`}</option>
                             <option value='30'>{`${selectedHour}:30`}</option>
@@ -100,12 +119,7 @@ const MakeAppointment: React.FC = ({ id }: { id?: string }) => {
                         <input
                             id='vendorName'
                             value={appointment.vendorName}
-                            onChange={(e) =>
-                                setAppointment((prevAppointment) => ({
-                                    ...prevAppointment,
-                                    vendorName: e.target.value,
-                                }))
-                            }
+                            onChange={vendorNameHandler}
                             required
                         />
                     </div>
@@ -114,12 +128,7 @@ const MakeAppointment: React.FC = ({ id }: { id?: string }) => {
                         <input
                             id='buyerName'
                             value={appointment.buyerName}
-                            onChange={(e) =>
-                                setAppointment((prevAppointment) => ({
-                                    ...prevAppointment,
-                                    buyerName: e.target.value,
-                                }))
-                            }
+                            onChange={buyerNameHandler}
                             required
                         />
                         <label htmlFor='companyName'>
@@ -128,12 +137,7 @@ const MakeAppointment: React.FC = ({ id }: { id?: string }) => {
                         <input
                             id='companyName'
                             value={appointment.companyName}
-                            onChange={(e) =>
-                                setAppointment((prevAppointment) => ({
-                                    ...prevAppointment,
-                                    companyName: e.target.value,
-                                }))
-                            }
+                            onChange={companyNameHandler}
                             required
                         />
                     </div>

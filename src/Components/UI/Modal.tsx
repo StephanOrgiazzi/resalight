@@ -1,6 +1,6 @@
 import React, { ReactNode } from 'react'
 import ReactDOM from 'react-dom'
-import { useAppSelector, useAppDispatch } from '../../hooks'
+import { useAppDispatch } from '../../hooks'
 import { appointmentsActions } from '../../store'
 
 import styles from './Modal.module.scss'
@@ -31,15 +31,11 @@ const Modal: React.FC<ModalType> = ({ children }) => {
     const portalBackdropElement = document.getElementById('backdrop-root')!
     const portalOverlayElement = document.getElementById('overlay-root')!
 
-    const showMakeAppointment = useAppSelector(
-        (state) => state.showMakeAppointment
-    )
-
     return (
         <>
-            {showMakeAppointment &&
+            {
                 ReactDOM.createPortal(<Backdrop />, portalBackdropElement)}
-            {showMakeAppointment &&
+            {
                 ReactDOM.createPortal(
                     <ModalOverlay>{children}</ModalOverlay>,
                     portalOverlayElement
