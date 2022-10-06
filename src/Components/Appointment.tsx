@@ -1,42 +1,61 @@
 import { useAppDispatch } from '../hooks'
 import { appointmentsActions } from '../store'
+import { AppointementType } from '../types'
+
 import styles from './Appointment.module.scss'
 
-const Appointment = (props: any) => {
+const Appointment: React.FC<{
+    data?: AppointementType | any
+}> = ({ data }) => {
     const dispatch = useAppDispatch()
 
     const clickHandler = (e: React.MouseEvent) => {
-        dispatch(appointmentsActions.selectHour(props.data.selectedHour))
-        dispatch(appointmentsActions.toggleMakeAppointment(props.data.id))
+        dispatch(appointmentsActions.selectHour(data.selectedHour))
+        dispatch(appointmentsActions.toggleMakeAppointment(data.id))
         e.stopPropagation()
     }
 
-    let customStyles = ""
+    let customDurationStyles
 
-    switch (props.data.duration) {
+    switch (data.duration) {
         case '30':
-            customStyles = styles['appointment-half']
+            customDurationStyles = styles['appointment-half']
             break
         case '45':
-            customStyles = styles['appointment-three']
+            customDurationStyles = styles['appointment-three']
             break
         case '60':
-            customStyles = styles['appointment-full']
+            customDurationStyles = styles['appointment-full']
             break
         default:
-            customStyles = ''
+            customDurationStyles = ''
+    }
+
+    let customQuarterStyles
+
+    switch (data.quarter) {
+        case '15':
+            customQuarterStyles = styles['appointment-start15']
+            break
+        case '30':
+            customQuarterStyles = styles['appointment-start30']
+            break
+        case '45':
+            customQuarterStyles = styles['appointment-start45']
+            break
+        default:
+            customQuarterStyles = ''
     }
 
     return (
         <div
             onClick={clickHandler}
-            className={`${styles.appointment} ${customStyles}`}
+            className={`${styles.appointment} ${customDurationStyles} ${customQuarterStyles}`}
         >
             <div>
-                {props.data.selectedHour}:{props.data.quarter} (
-                {props.data.duration}
-                min) - Meeting {props.data.vendorName} - {props.data.buyerName}{' '}
-                ({props.data.companyName})
+                {data.selectedHour}:{data.quarter} ({data.duration}
+                min) Meeting {data.vendorName} - {data.buyerName} (
+                {data.companyName})
             </div>
         </div>
     )

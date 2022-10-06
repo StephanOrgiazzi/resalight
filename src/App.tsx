@@ -1,4 +1,3 @@
-import './App.css'
 import { useAppSelector } from './hooks'
 import Day from './Components/Day'
 import MakeAppointment from './Components/MakeAppointment'

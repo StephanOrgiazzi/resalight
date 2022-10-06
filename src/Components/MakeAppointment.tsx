@@ -93,6 +93,7 @@ const MakeAppointment: React.FC = () => {
                         <label htmlFor='starts'>Starts at:</label>
                         <select
                             name='starts'
+                            value={appointment.quarter}
                             onChange={selectQuarterHandler}
                             required
                         >
@@ -109,6 +110,7 @@ const MakeAppointment: React.FC = () => {
                         <select
                             name='duration'
                             onChange={selectDurationHandler}
+                            value={appointment.duration}
                             required
                         >
                             <option value=''>
@@ -116,8 +118,8 @@ const MakeAppointment: React.FC = () => {
                             </option>
                             <option value='15'>15 minutes</option>
                             <option value='30'>30 minutes</option>
+                            <option value='45'>45 minutes</option>
                             <option value='60'>1 hour</option>
-                            <option value='120'>2 hours</option>
                         </select>
                     </div>
                     <div className={styles.vendor}>
@@ -151,7 +153,7 @@ const MakeAppointment: React.FC = () => {
                         <button onClick={cancelHandler}>
                             Remove appointment
                         </button>
-                        <button>Confirm appointment</button>
+                        {!existingAppointment && <button>Confirm appointment</button>}
                     </div>
                 </form>
             </div>
