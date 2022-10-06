@@ -1,4 +1,4 @@
-import { useAppDispatch } from '../hooks'
+import { useAppDispatch } from './Hooks/use-reduxhooks'
 import { appointmentsActions } from '../store'
 import { AppointementType } from '../types'
 import Appointment from './Appointment'

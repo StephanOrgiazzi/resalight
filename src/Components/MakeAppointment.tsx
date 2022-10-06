@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { useAppSelector, useAppDispatch } from '../hooks'
+import { useAppSelector, useAppDispatch } from './Hooks/use-reduxhooks'
 import { appointmentsActions } from '../store'
 import dayjs from 'dayjs'
 import Modal from './UI/Modal'
@@ -16,7 +16,7 @@ const MakeAppointment: React.FC = () => {
 
     const appointments = useAppSelector((state) => state.appointments)
     const existingAppointment = appointments.find(
-        (el) => el.id === currentAppointmentId
+        (el: {} | any) => el.id === currentAppointmentId
     )
 
     const generateId = () => {

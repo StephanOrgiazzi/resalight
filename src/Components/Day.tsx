@@ -1,12 +1,33 @@
 import Hour from './Hour'
 import dayjs from 'dayjs'
-import { useAppSelector } from '../hooks'
+import { useEffect } from 'react'
+import useHttp from './Hooks/use-http'
+import { useAppDispatch, useAppSelector } from './Hooks/use-reduxhooks'
 
 import styles from './Day.module.scss'
+import { appointmentsActions } from '../store'
 
 const Day: React.FC = () => {
     const workingHours = ['9', '10', '11', '12', '13', '14', '15', '16', '17']
+
+    const dispatch = useAppDispatch()
+
+    const { isLoading, error, sendRequest: fetchAppointments } = useHttp()
+
     const appointmentState = useAppSelector((state) => state.appointments)
+
+    useEffect(() => {
+        const setData = (appointments: any) => {
+            dispatch(appointmentsActions.setAppointments(appointments))
+        }
+
+        fetchAppointments(
+            {
+                url: 'https://resalight-default-rtdb.europe-west1.firebasedatabase.app/appointments.json',
+            },
+            setData
+        )
+    }, [fetchAppointments])
 
     const date = dayjs().format('MMMM D, YYYY')
 

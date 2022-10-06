@@ -1,6 +1,6 @@
 import React, { ReactNode } from 'react'
 import ReactDOM from 'react-dom'
-import { useAppDispatch } from '../../hooks'
+import { useAppDispatch } from '../Hooks/use-reduxhooks'
 import { appointmentsActions } from '../../store'
 
 import styles from './Modal.module.scss'
