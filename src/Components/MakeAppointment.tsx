@@ -1,11 +1,11 @@
 import React, { useState } from 'react'
 import { useAppSelector, useAppDispatch } from './Hooks/use-reduxhooks'
 import { appointmentsActions } from '../store'
+import { AppointementType } from '../types'
 import dayjs from 'dayjs'
 import Modal from './UI/Modal'
 
 import styles from './MakeAppointments.module.scss'
-import { AppointementType } from '../types'
 
 const MakeAppointment: React.FC = () => {
     const dispatch = useAppDispatch()
