@@ -6,15 +6,13 @@ import Appointment from './Appointment'
 import styles from './Hour.module.scss'
 
 const Hour: React.FC<{
-    value: number
-    appointment: boolean
+    value: string
     data?: AppointementType | any
 }> = (props) => {
     const dispatch = useAppDispatch()
-
-    const handleClick = (value: number) => {
-        dispatch(appointmentsActions.toggleMakeAppointment())
+    const handleClick = (value: string) => {
         dispatch(appointmentsActions.selectHour(value))
+        dispatch(appointmentsActions.toggleMakeAppointment(''))
     }
 
     return (
@@ -24,7 +22,7 @@ const Hour: React.FC<{
                 className={styles.hour}
             >
                 <div className={styles.value}>{props.value}:00</div>
-                {props.appointment && <Appointment />}
+                {props.data?.id && <Appointment data={props.data} />}
             </div>
         </li>
     )

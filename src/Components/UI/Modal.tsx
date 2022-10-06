@@ -9,7 +9,7 @@ const Backdrop: React.FC = () => {
     const dispatch = useAppDispatch()
 
     const cancelHandler = () => {
-        dispatch(appointmentsActions.toggleMakeAppointment())
+        dispatch(appointmentsActions.toggleMakeAppointment(''))
     }
 
     return <div onClick={cancelHandler} className={styles.backdrop} />

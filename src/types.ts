@@ -3,7 +3,8 @@ export type AppointementType = {
     vendorName: string
     buyerName: string
     companyName: string
-    selectedHour: string | null
+    selectedHour: string | any
     quarter: string
     duration: string
 }
+    

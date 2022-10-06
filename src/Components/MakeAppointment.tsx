@@ -7,10 +7,16 @@ import Modal from './UI/Modal'
 import styles from './MakeAppointments.module.scss'
 import { AppointementType } from '../types'
 
-const MakeAppointment: React.FC = ({ id }: { id?: string }) => {
+const MakeAppointment: React.FC = () => {
     const dispatch = useAppDispatch()
-    const appointementFromStore = useAppSelector((state) =>
-        state.appointments.find(({ id: idFromStore }) => id === idFromStore)
+
+    const currentAppointmentId = useAppSelector(
+        (state) => state.currentAppointmentId
+    )
+
+    const appointments = useAppSelector((state) => state.appointments)
+    const existingAppointment = appointments.find(
+        (el) => el.id === currentAppointmentId
     )
 
     const generateId = () => {
@@ -20,13 +26,12 @@ const MakeAppointment: React.FC = ({ id }: { id?: string }) => {
     const selectedHour = useAppSelector((state) => state.selectedHour)
 
     const [appointment, setAppointment] = useState<AppointementType>(
-        /* appointementFromStore ?? { */
-        {
+        existingAppointment || {
             id: generateId(),
             vendorName: '',
             buyerName: '',
             companyName: '',
-            selectedHour,
+            selectedHour: selectedHour,
             quarter: '',
             duration: '',
         }
@@ -34,13 +39,8 @@ const MakeAppointment: React.FC = ({ id }: { id?: string }) => {
 
     const cancelHandler = (e: React.FormEvent) => {
         e.preventDefault()
-        dispatch(appointmentsActions.toggleMakeAppointment())
-    }
-
-    const submitHandler = (e: React.FormEvent) => {
-        e.preventDefault()
-        dispatch(appointmentsActions.addAppointment(appointment))
-        dispatch(appointmentsActions.toggleMakeAppointment())
+        dispatch(appointmentsActions.toggleMakeAppointment(''))
+        dispatch(appointmentsActions.removeAppointment(appointment.id))
     }
 
     const selectQuarterHandler = (e: React.ChangeEvent<HTMLSelectElement>) => {
@@ -76,6 +76,12 @@ const MakeAppointment: React.FC = ({ id }: { id?: string }) => {
             ...prevAppointment,
             companyName: e.target.value,
         }))
+    }
+
+    const submitHandler = (e: React.FormEvent) => {
+        e.preventDefault()
+        dispatch(appointmentsActions.addAppointment(appointment))
+        dispatch(appointmentsActions.toggleMakeAppointment(''))
     }
 
     return (

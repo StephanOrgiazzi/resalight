@@ -1,12 +1,24 @@
 .appointment {
     width: 90%;
     height: 25%;
-    background-color: lightcoral;
+    background-color: royalblue;
     text-align: left;
     color: white;
     font-size: 14px;
 
+    &-half {
+        height: 50%;
+    }
+
+    &-three {
+        height: 75%;
+    }
+
+    &-full {
+        height: 100%;
+    }
+
     &:hover {
-        background-color: lightpink;
+        background-color: rgb(65, 105, 225, .8);
     }
 }

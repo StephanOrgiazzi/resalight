@@ -5,7 +5,7 @@ import { useAppSelector } from '../hooks'
 import styles from './Day.module.scss'
 
 const Day: React.FC = () => {
-    const workingHours = [9, 10, 11, 12, 13, 14, 15, 16, 17]
+    const workingHours = ['9', '10', '11', '12', '13', '14', '15', '16', '17']
     const appointmentState = useAppSelector((state) => state.appointments)
 
     const date = dayjs().format('MMMM D, YYYY')
@@ -19,25 +19,8 @@ const Day: React.FC = () => {
                 const data = appointmentState.find(
                     ({ selectedHour }) => selectedHour === hour
                 )
-
-                return (
-                    <Hour
-                        key={hour}
-                        value={hour}
-                        appointment={!!data}
-                        data={data}
-                    />
-                )
+                return <Hour key={hour} value={hour} data={data} />
             })}
-
-            {/*             {workingHours.map((hour) => {
-                const data = appointmentState.filter(({selectedHour}) => selectedHour === hour)
-
-                return <Hour key={hour} value={hour} appointment={!!data} data={data}>
-                    {data.map(appointement) => <Appointment/>}
-                </Hour>
-            })}
-        </ul> */}
         </ul>
     )
 }
