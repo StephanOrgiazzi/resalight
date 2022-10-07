@@ -5,7 +5,7 @@ import { AppointementType } from '../types'
 import styles from './Appointment.module.scss'
 
 const Appointment: React.FC<{
-    data?: AppointementType | any
+    data: AppointementType
 }> = ({ data }) => {
     const dispatch = useAppDispatch()
 

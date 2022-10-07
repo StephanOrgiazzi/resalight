@@ -6,6 +6,7 @@ import { useAppDispatch, useAppSelector } from './Hooks/use-reduxhooks'
 import { appointmentsActions } from '../store'
 
 import styles from './Day.module.scss'
+import { AppointementType } from '../types'
 
 const Day: React.FC = () => {
     const workingHours = ['9', '10', '11', '12', '13', '14', '15', '16', '17']
@@ -17,7 +18,7 @@ const Day: React.FC = () => {
     const appointmentState = useAppSelector((state) => state.appointments)
 
     useEffect(() => {
-        const setData = (appointments: any) => {
+        const setData = (appointments: AppointementType) => {
             dispatch(appointmentsActions.setAppointments(appointments))
         }
 
@@ -39,10 +40,16 @@ const Day: React.FC = () => {
                         <time>{date}</time>
                     </li>
                     {workingHours.map((hour) => {
-                        const data = appointmentState.find(
+                        const data = appointmentState.filter(
                             ({ selectedHour }) => selectedHour === hour
                         )
-                        return <Hour key={hour} value={hour} data={data} />
+                        let hourEl
+                        if (data && data.length > 0) {
+                            hourEl = <Hour key={hour} value={hour} data={data} />
+                        } else {
+                            hourEl = <Hour key={hour} value={hour} />
+                        }
+                        return hourEl
                     })}
                 </ul>
             )}

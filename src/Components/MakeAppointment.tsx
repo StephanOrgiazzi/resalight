@@ -16,7 +16,7 @@ const MakeAppointment: React.FC = () => {
 
     const appointments = useAppSelector((state) => state.appointments)
     const existingAppointment = appointments.find(
-        (el: {} | any) => el.id === currentAppointmentId
+        (el: AppointementType) => el.id === currentAppointmentId
     )
 
     const generateId = () => {
@@ -80,7 +80,7 @@ const MakeAppointment: React.FC = () => {
 
     const submitHandler = (e: React.FormEvent) => {
         e.preventDefault()
-        dispatch(appointmentsActions.addAppointment(appointment))
+        dispatch(appointmentsActions.addNewAppointment(appointment))
         dispatch(appointmentsActions.toggleMakeAppointment(''))
     }
 

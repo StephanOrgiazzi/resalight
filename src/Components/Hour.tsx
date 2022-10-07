@@ -7,7 +7,7 @@ import styles from './Hour.module.scss'
 
 const Hour: React.FC<{
     value: string
-    data?: AppointementType | any
+    data?: AppointementType[]
 }> = (props) => {
     const dispatch = useAppDispatch()
     const handleClick = (value: string) => {
@@ -22,7 +22,16 @@ const Hour: React.FC<{
                 className={styles.hour}
             >
                 <div className={styles.value}>{props.value}:00</div>
-                {props.data?.id && <Appointment data={props.data} />}
+
+                    {props.data &&
+                        props.data.map((appointment) => {
+                            return (
+                                <Appointment
+                                    data={appointment}
+                                    key={appointment.id}
+                                />
+                            )
+                        })}
             </div>
         </li>
     )
