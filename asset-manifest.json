@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/resalight/static/css/main.d9797667.css",
+    "main.js": "/resalight/static/js/main.31269379.js",
+    "index.html": "/resalight/index.html",
+    "main.d9797667.css.map": "/resalight/static/css/main.d9797667.css.map",
+    "main.31269379.js.map": "/resalight/static/js/main.31269379.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.d9797667.css",
+    "static/js/main.31269379.js"
+  ]
+}
