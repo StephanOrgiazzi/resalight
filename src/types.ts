@@ -7,4 +7,3 @@ export type AppointementType = {
     quarter: string
     duration: string
 }
-    

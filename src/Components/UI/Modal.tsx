@@ -33,13 +33,11 @@ const Modal: React.FC<ModalType> = ({ children }) => {
 
     return (
         <>
-            {
-                ReactDOM.createPortal(<Backdrop />, portalBackdropElement)}
-            {
-                ReactDOM.createPortal(
-                    <ModalOverlay>{children}</ModalOverlay>,
-                    portalOverlayElement
-                )}
+            {ReactDOM.createPortal(<Backdrop />, portalBackdropElement)}
+            {ReactDOM.createPortal(
+                <ModalOverlay>{children}</ModalOverlay>,
+                portalOverlayElement
+            )}
         </>
     )
 }

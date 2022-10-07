@@ -23,15 +23,15 @@ const Hour: React.FC<{
             >
                 <div className={styles.value}>{props.value}:00</div>
 
-                    {props.data &&
-                        props.data.map((appointment) => {
-                            return (
-                                <Appointment
-                                    data={appointment}
-                                    key={appointment.id}
-                                />
-                            )
-                        })}
+                {props.data &&
+                    props.data.map((appointment) => {
+                        return (
+                            <Appointment
+                                data={appointment}
+                                key={appointment.id}
+                            />
+                        )
+                    })}
             </div>
         </li>
     )

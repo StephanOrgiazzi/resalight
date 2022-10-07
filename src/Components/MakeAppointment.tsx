@@ -153,7 +153,9 @@ const MakeAppointment: React.FC = () => {
                         <button onClick={cancelHandler}>
                             Remove appointment
                         </button>
-                        {!existingAppointment && <button>Confirm appointment</button>}
+                        {!existingAppointment && (
+                            <button>Confirm appointment</button>
+                        )}
                     </div>
                 </form>
             </div>

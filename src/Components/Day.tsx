@@ -43,13 +43,11 @@ const Day: React.FC = () => {
                         const data = appointmentState.filter(
                             ({ selectedHour }) => selectedHour === hour
                         )
-                        let hourEl
                         if (data && data.length > 0) {
-                            hourEl = <Hour key={hour} value={hour} data={data} />
+                            return <Hour key={hour} value={hour} data={data} />
                         } else {
-                            hourEl = <Hour key={hour} value={hour} />
+                            return <Hour key={hour} value={hour} />
                         }
-                        return hourEl
                     })}
                 </ul>
             )}

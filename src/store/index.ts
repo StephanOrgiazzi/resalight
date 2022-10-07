@@ -1,7 +1,12 @@
 import { configureStore, createSlice } from '@reduxjs/toolkit'
 import { AppointementType } from '../types'
 
-const initialState = { showMakeAppointment: false, selectedHour: null, appointments: [] , currentAppointmentId: null }
+const initialState = {
+    showMakeAppointment: false,
+    selectedHour: null,
+    appointments: [],
+    currentAppointmentId: null,
+}
 
 const appointmentsSlice = createSlice({
     name: 'appointments',
@@ -21,8 +26,10 @@ const appointmentsSlice = createSlice({
             state.appointments = state.appointments.concat(action.payload)
         },
         removeAppointment(state, action) {
-            state.appointments = state.appointments.filter((el: AppointementType) => el.id !== action.payload)
-        }
+            state.appointments = state.appointments.filter(
+                (el: AppointementType) => el.id !== action.payload
+            )
+        },
     },
 })
 
