@@ -22,9 +22,6 @@ const appointmentsSlice = createSlice({
         setAppointments(state, action) {
             state.appointments = state.appointments.concat(action.payload)
         },
-        addNewAppointment(state, action) {
-            state.appointments = state.appointments.concat(action.payload)
-        },
         removeAppointment(state, action) {
             state.appointments = state.appointments.filter(
                 (el: AppointementType) => el.id !== action.payload

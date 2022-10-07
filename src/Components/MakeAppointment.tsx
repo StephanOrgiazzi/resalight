@@ -80,7 +80,7 @@ const MakeAppointment: React.FC = () => {
 
     const submitHandler = (e: React.FormEvent) => {
         e.preventDefault()
-        dispatch(appointmentsActions.addNewAppointment(appointment))
+        dispatch(appointmentsActions.setAppointments(appointment))
         dispatch(appointmentsActions.toggleMakeAppointment(''))
     }
 
